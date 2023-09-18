@@ -5,4 +5,4 @@
 ddt
 pycodestyle
 pylint
-selenium==3.4.1
+selenium==4.12.0

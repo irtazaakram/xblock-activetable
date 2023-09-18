@@ -29,7 +29,6 @@ setup(
     url='https://github.com/open-craft/xblock-activetable',
     license = 'AGPLv3',
     classifiers=[
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: GNU Affero General Public License v3',
     ],

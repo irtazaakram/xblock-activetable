@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  browser-tools: circleci/browser-tools@1.2.2
+  browser-tools: circleci/browser-tools@1.4.6
 
 commands:
   requirements:
@@ -22,18 +22,6 @@ jobs:
           name: Check code quality
           command: |
             tox -e quality
-  test-py36-django22:
-    docker:
-      - image: cimg/python:3.6-browsers
-    steps:
-      - checkout
-      - browser-tools/install-firefox
-      - browser-tools/install-geckodriver
-      - requirements
-      - run:
-          name: Run tests
-          command: |
-            tox -e py36-django22
   test-py38-django32:
     docker:
       - image: cimg/python:3.8-browsers
@@ -46,11 +34,23 @@ jobs:
           name: Run tests
           command: |
             tox -e py38-django32
+  test-py38-django42:
+    docker:
+      - image: cimg/python:3.8-browsers
+    steps:
+      - checkout
+      - browser-tools/install-firefox
+      - browser-tools/install-geckodriver
+      - requirements
+      - run:
+          name: Run tests
+          command: |
+            tox -e py38-django42
 
 workflows:
   version: 2
   main:
     jobs:
       - quality
-      - test-py36-django22
       - test-py38-django32
+      - test-py38-django42

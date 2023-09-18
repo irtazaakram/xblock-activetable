@@ -1,0 +1,33 @@
+name: Python application
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.8.2
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8.2
+    - name: Setup firefox
+      id: setup-firefox
+      uses: browser-actions/setup-firefox@v1
+      with:
+        firefox-version: latest
+    - uses: browser-actions/setup-geckodriver@latest
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip tox
+    - name: Test
+      run: |
+        firefox --version
+        geckodriver --version
+        tox -e py38-django42
